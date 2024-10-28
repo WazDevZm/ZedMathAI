@@ -35,7 +35,17 @@ def getHandInfo(img):
     else:
         return None
 def draw(info, prev_pos, canvas):
-    fingers, lm
+    fingers, lmList = info
+    current_pos = None
+    if fingers == [0,1,0,0,0]:
+        current_pos - lmList[0][0:2]
+        if prev_pos is None: prev_pos = current_pos
+        cv2.line(canvas, current_pos, prev_pos,(255,8,255), 18)
+    elif fingers == [1,0,0,0,0]:
+        canvas = np.zeros_like (img)
+    return current_pos, canvas
+
+def sendtoAI (model, canvas)
         # Calculate distance between specific landmarks on the first hand and draw it on the image
         length, info, img = detector.findDistance(lmList1[8][0:2], lmList1[12][0:2], img, color=(255, 0, 255),
                                                   scale=10)
