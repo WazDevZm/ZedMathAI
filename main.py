@@ -5,7 +5,7 @@ import numpy as np
 import google.generativeai as genai
 from PIL import Image
 import streamlit as st
- 
+from helpers.config import settings
  
 st.set_page_config(layout="wide")
 st.image('Zed Math AI.png')
@@ -20,7 +20,7 @@ with col2:
     output_text_area = st.subheader("")
  
  
-genai.configure(api_key="YOUR_API_KEY_HERE")
+genai.configure(api_key=settings.API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
  
 cap = cv2.VideoCapture(0)
