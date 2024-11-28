@@ -8,7 +8,7 @@ import streamlit as st
 
 
 st.set_page_config(layout="wide")
-st.image('MathGestures.png')
+st.image('Zed Math AI.png')
 
 col1, col2 = st.columns([3,2])
 with col1:
@@ -23,28 +23,24 @@ with col2:
 genai.configure(api_key="AIzaSyAu7w2tMO4kIAiB-RDMh8vywmF8OqBjpQk")
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-# Initialize the webcam to capture video
-# The '2' indicates the third camera connected to your computer; '0' would usually refer to the built-in camera
-cap = cv2.VideoCapture(1)
+
+cap = cv2.VideoCapture(0)
 cap.set(3,1280)
 cap.set(4,720)
 
-# Initialize the HandDetector class with the given parameters
+
 detector = HandDetector(staticMode=False, maxHands=1, modelComplexity=1, detectionCon=0.7, minTrackCon=0.5)
 
 
 def getHandInfo(img):
-    # Find hands in the current frame
-    # The 'draw' parameter draws landmarks and hand outlines on the image if set to True
-    # The 'flipType' parameter flips the image, making it easier for some detections
+    
     hands, img = detector.findHands(img, draw=False, flipType=True)
 
-    # Check if any hands are detected
+    
     if hands:
-        # Information for the first hand detected
-        hand = hands[0]  # Get the first hand detected
-        lmList = hand["lmList"]  # List of 21 landmarks for the first hand
-        # Count the number of fingers up for the first hand
+        hand = hands[0] 
+        lmList = hand["lmList"]  
+    
         fingers = detector.fingersUp(hand)
         print(fingers)
         return fingers, lmList
@@ -74,10 +70,9 @@ prev_pos= None
 canvas=None
 image_combined = None
 output_text= ""
-# Continuously get frames from the webcam
+
 while True:
-    # Capture each frame from the webcam
-    # 'success' will be True if the frame is successfully captured, 'img' will contain the frame
+  
     success, img = cap.read()
     img = cv2.flip(img, 1)
 
